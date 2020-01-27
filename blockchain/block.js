@@ -1,27 +1,23 @@
 var SHA256 = require("crypto-js/sha256");
 
 class Block {
-    block_id;
-    previous_hash;
-    records;
-    contributor_id;
-    hash;
 
-    constructor(block_id, previous_hash, records, contributor_id) {
-        this.block_id = block_id;
+    constructor(index, previous_hash, records, contributor_id, timestamp) {
+        this.index = index;
         this.previous_hash = previous_hash;
         this.records = records;
         this.contributor_id = contributor_id;
+        this.timestamp = timestamp;
 
         const block_values = {
-            block_id: block_id,
+            index: index,
             previous_hash: previous_hash,
             records: records,
             contributor_id: contributor_id,
+            timestamp: timestamp
         }
 
-        this.hash = SHA256(JSON.stringify(block_values));
-        console.log(hash);
+        this.hash = SHA256(JSON.stringify(block_values)).toString();
     }
 }
 
