@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewpageComponent implements OnInit {
 
+  pdfSrc: string = "../../assets/content.pdf";
+
   constructor() { }
 
   ngOnInit() {

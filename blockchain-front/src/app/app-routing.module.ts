@@ -1,12 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { ViewpageComponent } from './components/viewpage/viewpage.component'
 
 
 const routes: Routes = [
   {
-    path: 'coucou',
+    path: 'home',
     component: HomepageComponent
+  },
+
+  {
+    path: 'view',
+    component: ViewpageComponent
   }
 ];
 
