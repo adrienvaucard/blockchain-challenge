@@ -6,7 +6,7 @@ import { ViewpageComponent } from './components/viewpage/viewpage.component'
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomepageComponent
   },
 
