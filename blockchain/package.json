@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start src/app.js"
+    "start": "pm2 start ecosystem.config.js"
   },
   "dependencies": {
+    "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "crypto-js": "^3.1.9-1",
     "debug": "~2.6.9",

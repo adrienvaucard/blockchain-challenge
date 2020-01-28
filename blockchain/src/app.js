@@ -1,17 +1,13 @@
 var express = require('express');
+const routing = require("./router/router.js");
 var SHA256 = require("crypto-js/sha256");
-
+var app = require('../src/router/router');
 
 const BlockChain = require('./models/Blockchain');
 const PdfParser = require('./models/PdfParser');
-const Services = require('./services/services');
 
-
-var app = express();
-
-var blockChain = new BlockChain();
-var pdfParser = new PdfParser();
-var services = new Services();
+blockChain = new BlockChain();
+pdfParser = new PdfParser();
 
 let book = [];
 let lastPage = 1;
@@ -48,54 +44,4 @@ pdfParser.pdfExtract('./pdfs/content.pdf').then(function (result) {
   }
 });
 
-// blockChain.launchBlockchain(blockChain, pdfParser, services, book, lastPage);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// blockchainInit.then(function (value) {
-//   console.log(value);
-// });
-
-// blockchainIterate.then(function (value) {
-//   console.log(value);
-// });
-
-
-
-// blockChain.blockchainIterate().then();
-
-// Add Blocks to Blockchain
-// for (let i = 0, p = Promise.resolve(); i < 10; i++) {
-//   p = p.then(_ => new Promise(resolve =>
-//       setTimeout(function () {
-//           console.log(i);
-//           resolve();
-//       }, Math.random() * 1000)
-//   ));
-// }
-
-
-// function refresh() {
-//   services.addBlock();
-// };
-
-// refresh();
-
 app.listen(3000);
-
-
-
-
-module.exports = app;

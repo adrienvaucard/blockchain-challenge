@@ -49,7 +49,7 @@ class Blockchain {
                 contributor_id,
                 last_page + 4,
                 i,
-                new Date(),
+                new Date().getTime(),
             );
 
             // Check if Hash start with a 0
