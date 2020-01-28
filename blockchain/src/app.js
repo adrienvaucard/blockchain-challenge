@@ -1,14 +1,23 @@
-var express = require('express');
+// Dependencies
+const express = require('express');
 const routing = require("./router/router.js");
-var SHA256 = require("crypto-js/sha256");
+const SHA256 = require("crypto-js/sha256");
+const axios = require('axios').default;
+
+// App variable from Router
 var app = require('../src/router/router');
 
+// Declare custom classes
 const BlockChain = require('./models/Blockchain');
 const PdfParser = require('./models/PdfParser');
+const Services = require('../src/services/services');
 
-blockChain = new BlockChain();
-pdfParser = new PdfParser();
+// Instance custom classes
+var blockChain = new BlockChain();
+var pdfParser = new PdfParser();
+var sevices = new Services();
 
+// Initialize variables
 let book = [];
 let lastPage = 1;
 
@@ -38,10 +47,18 @@ pdfParser.pdfExtract('./pdfs/content.pdf').then(function (result) {
       hash: SHA256(JSON.stringify(book.slice(startPage, endPage))).toString()
     };
 
+    // Create Block
     block = blockChain.newBlock(lastBlock.hash, pages, 0, lastBlock.last_page);
+
+    // Send Block for Validation
+    
+
+    // Add Block
     blockChain.chain.push(block);
     console.log(block);
   }
 });
 
-app.listen(3000);
+app.listen();
+
+module.exports = blockChain, pdfParser
