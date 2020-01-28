@@ -31,7 +31,6 @@ class PdfParser {
                 });
             }
         });
-        console.log(pageText);
         return pageText;
     }
 }

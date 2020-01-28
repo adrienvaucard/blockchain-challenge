@@ -1,23 +1,5 @@
 class Services {
-    constructor() {
-
-        this.addBlock = new Promise((resolve, reject) => {
-
-            // Get Last block infos
-            const lastBlock = blockChain.chain[blockChain.chain.length - 1];
-            console.log(lastBlock);
-
-
-            // Create new block with previous informations
-            pdfParser.pdfExtract('./pdfs/content.pdf', lastBlock.last_page, lastBlock.last_page + 4).then(function (result) {
-                const newBlock = blockChain.newBlock(lastBlock.hash, result, lastBlock.contributor_id, lastBlock.last_page);
-                resolve(newBlock);
-            },
-            function(reason) {
-                reject(reason);
-            });
-        });
-    }
+    constructor() {}
     // BlockChain Methods
 
     // retrieve the whole blockchain
@@ -27,7 +9,13 @@ class Services {
     };
 
     // Add Block to the blockchain
-
+    async addBlock(nonce) {
+        const lastBlock = blockChain.chain[blockChain.chain.length-1];
+        pdfParser.pdfExtract('./pdfs/content.pdf', lastBlock.last_page, lastBlock.last_page + 4).then(function (result) {
+            blockChain.newBlock(lastBlock.hash, result, 0, last.last_page,nonce);
+            console.log(blockChain.chain);
+          });
+    }
 }
 
 

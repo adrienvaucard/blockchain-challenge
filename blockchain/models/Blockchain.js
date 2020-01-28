@@ -1,52 +1,44 @@
 const Block = require("./Block");
 
 class Blockchain {
-  constructor() {
-    // Create chain and transaction
-    this.chain = [];
-    this.current_transactions = [];
-    this.pow;
-  }
+    constructor() {
+        // Create chain and transaction
+        this.chain = [];
+        this.current_transactions = [];
+        this.pow;
+    }
 
-  newBlock(previous_hash, records, contributor_id, last_page, nonce) {
-    const block = new Block(
-      this.chain.length + 1,
-      previous_hash,
-      records,
-      contributor_id,
-      last_page + 4,
-      nonce,
-      new Date(),
-    );
+    newBlock(previous_hash, records, contributor_id, last_page) {
+        let block;
+        let nonceFound = false;
+        let i = 0;
 
-    console.log(block);
+        while (!nonceFound) {
+            block = new Block(
+                this.chain.length,
+                previous_hash,
+                records,
+                contributor_id,
+                last_page + 4,
+                i,
+                new Date(),
+            );
 
-    this.current_transactions = []
-    this.chain.push(block)
-    return block;
-  }
+            // Check if Hash start with a 0
+            if (block.hash.startsWith('0')) {
+                nonceFound = true;
+            } else {
+                i++;
+            }
+            console.log(block.hash);
+        }
 
-  newTransaction(sender, recipient, amount) {
-    //   this.current_transactions.push({
-    //     sender: sender,
-    //     recipient: recipient,
-    //     amount: amount
-    //   })
-    //   return this.lastBlock()['index'] + 1
-  }
 
-  hash(block) {
-    //   const blockString = JSON.stringify(block)
-    //   const hash = crypto.createHmac(process.env.HASH_TYPE, process.env.CRYPTO_SECRET)
-    //   .update(blockString)
-    //   .digest('hex')
+        this.current_transactions = []
+        this.chain.push(block)
+        return block;
+    }
 
-    //   return hash
-  }
-
-  lastBlock() {
-    //   return this.chain.slice(-1)[0]
-  }
 }
 
 module.exports = Blockchain;
