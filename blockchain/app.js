@@ -2,29 +2,83 @@ var express = require('express');
 
 const BlockChain = require('./models/Blockchain');
 const PdfParser = require('./models/PdfParser');
+const Services = require('./services/services');
+
 
 var app = express();
 
-blockChain = new BlockChain();
-pdfParser = new PdfParser();
+var blockChain = new BlockChain();
+var pdfParser = new PdfParser();
+var services = new Services();
 
-// var timer = Math.floor(Math.random() * 31);
+let book = [];
+let lastPage = 1;
 
+// Get Whole Book
+pdfParser.pdfExtract('./pdfs/content.pdf').then(function (result) {
+  book = result;
 
-// Initialize Genesis Block
-pdfParser.pdfExtract('./pdfs/content.pdf', 1, 5).then(function (result) {
-  blockChain.newBlock("f5cfe0f1ae5acda96e516bb84c23aedbf5c77b3381af80dce24b23a9d362828e", result, 0, 1, 1);
+  // Initialize Genesis Block
+  let pages = book.slice(1, 5);
+  let block = blockChain.newBlock("f5cfe0f1ae5acda96e516bb84c23aedbf5c77b3381af80dce24b23a9d362828e", pages, 0, lastPage);
+  blockChain.chain.push(block);
   console.log(blockChain.chain);
+
+  lastPage = lastPage + 4;
+  // Create other block and add them to blockchain
+  for (i = lastPage.valueOf(); i < book.length; i += 4) {
+    const lastBlock = blockChain.chain[(blockChain.chain.length - 1).valueOf()];
+    const startPage = lastBlock.last_page;
+    const endPage = lastBlock.last_page + 4 <= book.length ? lastBlock.last_page + 4 : book.length;
+    pages = book.slice(startPage, endPage);
+    console.log(pages);
+    block = blockChain.newBlock(lastBlock.hash, pages, 0, lastBlock.last_page);
+    console.log(block);
+  }
 });
 
 
-// async function refresh() {
-//   const lastBlock = blockChain.chain[blockChain.chain.length - 1];
-//   pdfParser.pdfExtract('./pdfs/content.pdf', lastBlock.last_page, last_block.last_page + 4).then(function (result) {
-//     blockChain.newBlock(lastBlock.hash, result, 0, last_block.last_page + 4);
-//     // timer = Math.floor(Math.random() * 31);
-//   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+// blockchainInit.then(function (value) {
+//   console.log(value);
+// });
+
+// blockchainIterate.then(function (value) {
+//   console.log(value);
+// });
+
+
+
+// blockChain.blockchainIterate().then();
+
+// Add Blocks to Blockchain
+// for (let i = 0, p = Promise.resolve(); i < 10; i++) {
+//   p = p.then(_ => new Promise(resolve =>
+//       setTimeout(function () {
+//           console.log(i);
+//           resolve();
+//       }, Math.random() * 1000)
+//   ));
+// }
+
+
+// function refresh() {
+//   services.addBlock();
 // };
+
+// refresh();
 
 app.listen(3000);
 
