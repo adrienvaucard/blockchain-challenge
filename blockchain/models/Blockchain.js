@@ -8,13 +8,14 @@ class Blockchain {
     this.pow;
   }
 
-  newBlock(previous_hash, records, contributor_id, last_page) {
+  newBlock(previous_hash, records, contributor_id, last_page, nonce) {
     const block = new Block(
       this.chain.length + 1,
       previous_hash,
       records,
       contributor_id,
       last_page + 4,
+      nonce,
       new Date(),
     );
 
