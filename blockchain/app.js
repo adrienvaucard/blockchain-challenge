@@ -33,6 +33,7 @@ pdfParser.pdfExtract('./pdfs/content.pdf').then(function (result) {
     pages = book.slice(startPage, endPage);
     console.log(pages);
     block = blockChain.newBlock(lastBlock.hash, pages, 0, lastBlock.last_page);
+    blockChain.chain.push(block);
     console.log(block);
   }
 });
