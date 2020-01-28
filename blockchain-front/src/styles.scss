@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  background-color: #88BEE4;
+}
+
+.logo {
+  height: 12em;
+  width: 12em;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+
+.container-card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.book-card {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  height: 32em;
+  width: 25em;
+  border-radius: 15px;
+  box-shadow: 0px 0px 15px rgba(88, 88, 88, 0.4);
+
+  &:hover {
+    transition:all 0.3s ease-in-out;
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+  }
+}
