@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const { Blockchain } = require('../models/Blockchain');
+
 //import modules
 
 
@@ -17,6 +19,7 @@ PUT model/id
 */
 
 // app.get('/', services.getBlockchain());
+
 
 // //Driver Routes
 // app.post('/block', services.addBlock());
