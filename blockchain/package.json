@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start ecosystem.config.js"
+    "start": "pm2 start ecosystem.config.js --update-env && npm run logs",
+    "logs" : "pm2 logs",
+    "kill": "pm2 flush && pm2 kill",
+    "killall": "pm2 stop all"
   },
   "dependencies": {
     "axios": "^0.19.2",
