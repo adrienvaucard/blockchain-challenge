@@ -1,1 +1,13 @@
-<p>viewpage works!</p>
+<div class="upper-menu">
+  <a routerLink="/">
+    <img src="../../../assets/logo.svg" class="logo">
+  </a>
+</div>
+<pdf-viewer src="{{pdfSrc}}" [page]="page" [show-all]="false" (after-load-complete)="afterLoadComplete($event)"
+  [zoom]=0.8 [show-borders]="true">
+</pdf-viewer>
+<div *ngIf="isLoaded" class="nav-view">
+  <button (click)="prevPage()" [disabled]="page === 1" class="prev">Précédent</button>
+  <span class="pages">{{ page }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="page === totalPages" class="next">Suivant</button>
+</div>
